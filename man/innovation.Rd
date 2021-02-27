@@ -3,11 +3,14 @@
 \name{innovation}
 \alias{innovation}
 \alias{print.innovation}
+\alias{plot.innovation}
 \title{Family of Innovations Process for Fitting an INAR(p) Model}
 \usage{
 innovation(dist)
 
 \method{print}{innovation}(x, ...)
+
+\method{plot}{innovation}(x, ...)
 }
 \arguments{
 \item{dist}{Character specification of the innovation process, see
@@ -63,6 +66,10 @@ There are some discrete distributions available for the
 \dontrun{
  ### Specification of the Poisson innovation to 'inv' object
  inv <- innovation("PO")
+
+ ### Methods
+ inv
+ plot(inv)
 
  ### Generating observations
  x <- inv$r(500, 5)
