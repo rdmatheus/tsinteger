@@ -3,7 +3,7 @@
 \name{innovation}
 \alias{innovation}
 \alias{print.innovation}
-\title{Family of Innovations Process for Fitting an INAR(p) model}
+\title{Family of Innovations Process for Fitting an INAR(p) Model}
 \usage{
 innovation(dist)
 
@@ -26,6 +26,10 @@ The function \code{innovation()} returns a list whose components
    \item{d:}{ Probability mass function \code{function(x, mu, phi)}.}
    \item{r:}{ Random generator function \code{function(n, mu, phi)}.}
    \item{npar:}{ Number of parameters of the innovation process specified.}
+   \item{constraint:}{ Character; describes the restriction between
+       parameters if any.}
+   \item{disp:}{ Describes the types of dispersion that the distribution
+       can model.}
    \item{name:}{ Name of the distribution.}
  }
 

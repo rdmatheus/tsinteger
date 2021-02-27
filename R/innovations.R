@@ -1,6 +1,6 @@
 #' @name innovation
 #'
-#' @title Family of Innovations Process for Fitting an INAR(p) model
+#' @title Family of Innovations Process for Fitting an INAR(p) Model
 #'
 #' @description Provide the current available distributions that can be
 #'     used as an innovation process in a fit of the INAR(p) model.
@@ -31,6 +31,10 @@
 #'    \item{d:}{ Probability mass function \code{function(x, mu, phi)}.}
 #'    \item{r:}{ Random generator function \code{function(n, mu, phi)}.}
 #'    \item{npar:}{ Number of parameters of the innovation process specified.}
+#'    \item{constraint:}{ Character; describes the restriction between
+#'        parameters if any.}
+#'    \item{disp:}{ Describes the types of dispersion that the distribution
+#'        can model.}
 #'    \item{name:}{ Name of the distribution.}
 #'  }
 #'
@@ -80,8 +84,13 @@ print.innovation <- function(x, ...){
       "\nInnovation process:", x$name,
       "\n----------------------------------------",
       "\nAbreviation:", innovations[INNOVATIONS == x$name],
-      "\nNumber of parameters:", x$npar,
-      "\n---")
+      "\nNumber of parameters:", x$npar)
+
+      if (x$npar > 1){
+       cat("\nConstraints:", x$constraint)
+      }
+      cat("\nDispersions:", x$disp)
+      cat("\n---")
 }
 
 ### Distributions: ----
@@ -111,6 +120,12 @@ BP <- function(){
 
   ## Name
   out$name <- "BerPoi"
+
+  ## Constraint
+  out$constraint <- "phi > 1 - min{mu, 1/mu}"
+
+  ## Dispersions
+  out$disp <- "Under-dispersion"
 
   out
 }
@@ -158,6 +173,12 @@ BG <- function(){
   ## Name
   out$name <- "BerG"
 
+  ## Constraint
+  out$constraint <- "phi > |mu - 1|"
+
+  ## Dispersions
+  out$disp <- "Under-, equi-, and over-dispersion"
+
   out
 }
 
@@ -182,6 +203,12 @@ GE <- function(){
   ## Name
   out$name <- "Geometric"
 
+  ## Constraint
+  out$constraint <- NULL
+
+  ## Dispersions
+  out$disp <- "Over-dispersion"
+
   out
 }
 
@@ -204,6 +231,12 @@ PO <- function(){
 
   ## Name
   out$name <- "Poisson"
+
+  ## Constraint
+  out$constraint <- NULL
+
+  ## Dispersions
+  out$disp <- "Equi-dispersion"
 
   out
 }
