@@ -7,7 +7,7 @@
 #'
 #' @param dist Character specification of the innovation process, see
 #'     details.
-#' @param x A \code{"innovation"} object.
+#' @param x An \code{"innovation"} object.
 #' @param ... Further arguments for other specific methods.
 #'
 #' @details There are some discrete distributions available for the

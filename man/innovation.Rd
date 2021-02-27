@@ -16,7 +16,7 @@ innovation(dist)
 \item{dist}{Character specification of the innovation process, see
 details.}
 
-\item{x}{A \code{"innovation"} object.}
+\item{x}{An \code{"innovation"} object.}
 
 \item{...}{Further arguments for other specific methods.}
 }
