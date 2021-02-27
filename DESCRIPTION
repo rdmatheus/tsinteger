@@ -1,0 +1,14 @@
+Package: tsinteger
+Type: Package
+Title: Autoregressive Models for Analysis of Integer-Valued Time Series 
+Version: 0.1.0
+Authors@R: person(given = "Rodrigo",
+                  family = "Matheus",
+                  role = c("aut", "cre"),
+                  email = "rodrigo.matheus@live.com",
+                  comment = c(ORCID = "0000-0001-8101-3038"))
+Description: Implementation of the integer-valued autoregressive process of
+    order p (INARS(p)) for analysis of integer-valued time series. 
+Encoding: UTF-8
+LazyData: true
+License: GPL (>= 3)
