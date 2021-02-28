@@ -71,8 +71,7 @@
 #'
 #' @export
 innovation <- function(dist){
-  dist <- match.fun(dist)
-  dist <- eval(dist())
+  dist <- get(dist)()
   class(dist) <- "innovation"
   dist
 }
