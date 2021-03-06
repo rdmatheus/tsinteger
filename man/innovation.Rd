@@ -3,14 +3,11 @@
 \name{innovation}
 \alias{innovation}
 \alias{print.innovation}
-\alias{plot.innovation}
 \title{Family of Innovations Process for Fitting an INAR(p) Model}
 \usage{
 innovation(dist)
 
 \method{print}{innovation}(x, ...)
-
-\method{plot}{innovation}(x, ...)
 }
 \arguments{
 \item{dist}{Character specification of the innovation process, see
@@ -58,6 +55,7 @@ There are some discrete distributions available for the
  \bold{Distribution}  \tab \bold{Abbreviation} \tab \bold{Number of parameters}\cr
  BerPoi    \tab \code{"BP"} \tab 2 \cr
  BerG    \tab \code{"BG"} \tab 2 \cr
+ Mean-Parameterized COM-Poisson \tab \code{"CP"} \tab 2 \cr
  Geometric \tab \code{"GE"} \tab 1 \cr
  Poisson  \tab \code{"PO"}      \tab  1  \cr
  }

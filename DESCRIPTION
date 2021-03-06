@@ -14,7 +14,8 @@ LazyData: true
 License: GPL (>= 3)
 RoxygenNote: 7.1.1
 Imports: 
-    RColorBrewer (>= 1.1.2)
+    RColorBrewer (>= 1.1.2),
+    mpcmp (>= 0.3.6)
 Suggests: 
     knitr,
     rmarkdown
