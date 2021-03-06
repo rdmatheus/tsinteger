@@ -16,6 +16,7 @@
 #'
 #'   \tabular{lll}{
 #'  \bold{Distribution}  \tab \bold{Abbreviation} \tab \bold{Number of parameters}\cr
+#'  Bernoulli \tab \code{"BE"} \tab 1 \cr
 #'  BerPoi    \tab \code{"BP"} \tab 2 \cr
 #'  BerG    \tab \code{"BG"} \tab 2 \cr
 #'  Mean-Parameterized COM-Poisson \tab \code{"CP"} \tab 2 \cr
@@ -98,6 +99,35 @@ print.innovation <- function(x, ...){
 }
 
 ### Distributions: ----
+
+### Bernoulli ------------------------------------------------------------------
+BE <- function(){
+  out <- list()
+
+  ## Probability mass function
+  out$d <- function(x, mu, phi = NULL){
+    stats::dbinom(x, size = 1, prob = mu)
+  }
+
+  ## Random generator
+  out$r <- function(n, mu, phi = NULL){
+    stats::rbinom(n, size = 1, prob = mu)
+  }
+
+  ## Number of parameters
+  out$npar <- 1
+
+  ## Name
+  out$name <- "Bernoulli"
+
+  ## Constraint
+  out$constraint <- NULL
+
+  ## Dispersions
+  out$disp <- "Under-dispersion"
+
+  out
+}
 
 ### BerPoi ---------------------------------------------------------------------
 BP <- function(){

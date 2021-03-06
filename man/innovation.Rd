@@ -53,6 +53,7 @@ There are some discrete distributions available for the
 
   \tabular{lll}{
  \bold{Distribution}  \tab \bold{Abbreviation} \tab \bold{Number of parameters}\cr
+ Bernoulli \tab \code{"BE"} \tab 1 \cr
  BerPoi    \tab \code{"BP"} \tab 2 \cr
  BerG    \tab \code{"BG"} \tab 2 \cr
  Mean-Parameterized COM-Poisson \tab \code{"CP"} \tab 2 \cr
