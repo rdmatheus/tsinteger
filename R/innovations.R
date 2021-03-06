@@ -18,6 +18,7 @@
 #'  \bold{Distribution}  \tab \bold{Abbreviation} \tab \bold{Number of parameters}\cr
 #'  BerPoi    \tab \code{"BP"} \tab 2 \cr
 #'  BerG    \tab \code{"BG"} \tab 2 \cr
+#'  Mean-Parameterized COM-Poisson \tab \code{"CP"} \tab 2 \cr
 #'  Geometric \tab \code{"GE"} \tab 1 \cr
 #'  Poisson  \tab \code{"PO"}      \tab  1  \cr
 #'  }
@@ -102,7 +103,7 @@ print.innovation <- function(x, ...){
 BP <- function(){
   out <- list()
 
-  ## Generating function
+  ## Probability mass function
   out$d <- function(x, mu, phi){
     lambda <- mu - sqrt(mu * (1 - phi))
     alpha <- sqrt(mu * (1 - phi))
@@ -137,7 +138,7 @@ BP <- function(){
 BG <- function(){
   out <- list()
 
-  ## Generating function
+  ## Probability mass function
   out$d <- function(x, mu, phi){
     p0 <- (1 - mu + phi) / (1 + mu + phi)
     p  <- 4 * mu * ((mu + phi - 1)^(x[x > 0] - 1)) / ((mu + phi + 1)^(x[x > 0] + 1))
@@ -185,12 +186,41 @@ BG <- function(){
   out
 }
 
+### Mean-Parameterized COM-Poisson ---------------------------------------------
+CP <- function(){
+  out <- list()
+
+  ## Probability mass function
+  out$d <- function(x, mu, phi){
+    mpcmp::dcomp(x, mu = mu, nu = 1/phi)
+  }
+
+  ## Random generator
+  out$r <- function(n, mu, phi){
+    mpcmp::rcomp(n, mu = mu, nu = 1/phi)
+  }
+
+  ## Number of parameters
+  out$npar <- 2
+
+  ## Name
+  out$name <- "Mean-Parameterized COM-Poisson"
+
+  ## Constraint
+  out$constraint <- NULL
+
+  ## Dispersions
+  out$disp <- "Under-, equi-, and over-dispersion"
+
+  out
+
+}
 
 ### Geometric ------------------------------------------------------------------
 GE <- function(){
   out <- list()
 
-  ## Generating function
+  ## Probability mass function
   out$d <- function(x, mu, phi = NULL){
     stats::dgeom(x, prob = 1/(mu + 1))
   }
@@ -219,7 +249,7 @@ GE <- function(){
 PO <- function(){
   out <- list()
 
-  ## Generating function
+  ## Probability mass function
   out$d <- function(x, mu, phi = NULL){
     stats::dpois(x, lambda = mu)
   }
