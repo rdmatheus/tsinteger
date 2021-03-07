@@ -32,6 +32,7 @@
 #'  \itemize{
 #'    \item{d:}{ Probability mass function \code{function(x, mu, phi)}.}
 #'    \item{r:}{ Random generator function \code{function(n, mu, phi)}.}
+#'    \item{par:}{ Describes the parametric space of the distribution.}
 #'    \item{npar:}{ Number of parameters of the innovation process specified.}
 #'    \item{constraint:}{ Character; describes the restriction between
 #'        parameters if any.}
@@ -89,7 +90,7 @@ print.innovation <- function(x, ...){
       "\nInnovation process:", x$name,
       "\n----------------------------------------",
       "\nAbreviation:", innovations[INNOVATIONS == x$name],
-      "\nNumber of parameters:", x$npar)
+      "\nParameters:", x$par)
 
       if (x$npar > 1){
        cat("\nConstraints:", x$constraint)
@@ -105,14 +106,17 @@ BE <- function(){
   out <- list()
 
   ## Probability mass function
-  out$d <- function(x, mu, phi = NULL){
-    stats::dbinom(x, size = 1, prob = mu)
+  out$d <- function(x, par){
+    stats::dbinom(x, size = 1, prob = par)
   }
 
   ## Random generator
-  out$r <- function(n, mu, phi = NULL){
-    stats::rbinom(n, size = 1, prob = mu)
+  out$r <- function(n, par){
+    stats::rbinom(n, size = 1, prob = par)
   }
+
+  ## Parameters
+  out$parameters <- "0 < theta < 1"
 
   ## Number of parameters
   out$npar <- 1
@@ -134,7 +138,10 @@ BP <- function(){
   out <- list()
 
   ## Probability mass function
-  out$d <- function(x, mu, phi){
+  out$d <- function(x, par){
+    mu <- par[1]
+    phi <- par[2]
+
     lambda <- mu - sqrt(mu * (1 - phi))
     alpha <- sqrt(mu * (1 - phi))
     prob <- (1 - alpha) * stats::dpois(x, lambda) +
@@ -142,12 +149,18 @@ BP <- function(){
   }
 
   ## Random generator
-  out$r <- function(n, mu, phi){
+  out$r <- function(n, par){
+    mu <- par[1]
+    phi <- par[2]
+
     lambda <- mu - sqrt(mu * (1 - phi))
     alpha <- sqrt(mu * (1 - phi))
 
     stats::rpois(n, lambda) + stats::rbinom(n, size = 1, prob = alpha)
   }
+
+  ## Parameters
+  out$par <- "theta > 0; 0 < phi < 1"
 
   ## Number of parameters
   out$npar <- 2
@@ -156,7 +169,7 @@ BP <- function(){
   out$name <- "BerPoi"
 
   ## Constraint
-  out$constraint <- "phi > 1 - min{mu, 1/mu}"
+  out$constraint <- "phi > 1 - min{theta, 1/theta}"
 
   ## Dispersions
   out$disp <- "Under-dispersion"
@@ -169,7 +182,10 @@ BG <- function(){
   out <- list()
 
   ## Probability mass function
-  out$d <- function(x, mu, phi){
+  out$d <- function(x, par){
+    mu <- par[1]
+    phi <- par[2]
+
     p0 <- (1 - mu + phi) / (1 + mu + phi)
     p  <- 4 * mu * ((mu + phi - 1)^(x[x > 0] - 1)) / ((mu + phi + 1)^(x[x > 0] + 1))
 
@@ -180,7 +196,9 @@ BG <- function(){
   }
 
   ## Random generator
-  out$r <- function(n, mu, phi){
+  out$r <- function(n, par){
+    mu <- par[1]
+    phi <- par[2]
 
     p <- stats::runif(n)
 
@@ -201,6 +219,9 @@ BG <- function(){
     quanti[sort(index, index.return = TRUE)$ix]
   }
 
+  ## Parameters
+  out$parameters <- "theta, phi > 0"
+
   ## Number of parameters
   out$npar <- 2
 
@@ -208,7 +229,7 @@ BG <- function(){
   out$name <- "BerG"
 
   ## Constraint
-  out$constraint <- "phi > |mu - 1|"
+  out$constraint <- "phi > |theta - 1|"
 
   ## Dispersions
   out$disp <- "Under-, equi-, and over-dispersion"
@@ -221,14 +242,17 @@ CP <- function(){
   out <- list()
 
   ## Probability mass function
-  out$d <- function(x, mu, phi){
-    mpcmp::dcomp(x, mu = mu, nu = 1/phi)
+  out$d <- function(x, par){
+    mpcmp::dcomp(x, mu = par[1], nu = 1/par[2])
   }
 
   ## Random generator
-  out$r <- function(n, mu, phi){
-    mpcmp::rcomp(n, mu = mu, nu = 1/phi)
+  out$r <- function(n, par){
+    mpcmp::rcomp(n, mu = par[1], nu = 1/par[2])
   }
+
+  ## Parameters
+  out$parameters <- "theta, phi > 0"
 
   ## Number of parameters
   out$npar <- 2
@@ -251,14 +275,17 @@ GE <- function(){
   out <- list()
 
   ## Probability mass function
-  out$d <- function(x, mu, phi = NULL){
-    stats::dgeom(x, prob = 1/(mu + 1))
+  out$d <- function(x, par){
+    stats::dgeom(x, prob = 1/(par + 1))
   }
 
   ## Random generator
-  out$r <- function(n, mu, phi = NULL){
-    stats::rgeom(n, prob =  1/(mu + 1))
+  out$r <- function(n, par){
+    stats::rgeom(n, prob =  1/(par + 1))
   }
+
+  ## Parameters
+  out$parameters <- "theta > 0"
 
   ## Number of parameters
   out$npar <- 1
@@ -280,14 +307,17 @@ PO <- function(){
   out <- list()
 
   ## Probability mass function
-  out$d <- function(x, mu, phi = NULL){
-    stats::dpois(x, lambda = mu)
+  out$d <- function(x, par){
+    stats::dpois(x, lambda = par)
   }
 
   ## Random generator
-  out$r <- function(n, mu, phi = NULL){
-    stats::rpois(n, lambda = mu)
+  out$r <- function(n, par){
+    stats::rpois(n, lambda = par)
   }
+
+  ## Parameters
+  out$parameters <- "theta > 0"
 
   ## Number of parameters
   out$npar <- 1
