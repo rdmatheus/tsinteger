@@ -7,7 +7,7 @@
 #' @param n A strictly positive integer given the length of the output series.
 #' @param alpha A vector of INAR coefficients.
 #' @param par A vector with the innovation process parameters.
-#' @param inv Character specification of the innovation process, see
+#' @param innovation Character specification of the innovation process, see
 #'     details.
 #' @param n.start The length of 'burn-in' period. If \code{NA},
 #'      the default, a reasonable value (500) is computed.
@@ -44,13 +44,13 @@
 #' layout(1)
 #'
 #' @export
-inar.sim <- function(n, alpha, par, inv = "PO", n.start = NA){
+inar.sim <- function(n, alpha, par, innovation = "PO", n.start = NA){
 
   ## Autoregressive order
   p <- length(alpha)
 
   ## Innovation process
-  inv <- innovation(inv)
+  inv <- get(innovation)()
 
   ## Length of burn-in period
   if (is.na(n.start)) n.start <- 500

@@ -5,7 +5,7 @@
 \alias{inar.sim}
 \title{Simulate From an INAR(p) Model}
 \usage{
-inar.sim(n, alpha, par, inv = "PO", n.start = NA)
+inar.sim(n, alpha, par, innovation = "PO", n.start = NA)
 }
 \arguments{
 \item{n}{A strictly positive integer given the length of the output series.}
@@ -14,7 +14,7 @@ inar.sim(n, alpha, par, inv = "PO", n.start = NA)
 
 \item{par}{A vector with the innovation process parameters.}
 
-\item{inv}{Character specification of the innovation process, see
+\item{innovation}{Character specification of the innovation process, see
 details.}
 
 \item{n.start}{The length of 'burn-in' period. If \code{NA},
