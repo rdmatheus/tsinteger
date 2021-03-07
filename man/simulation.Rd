@@ -12,8 +12,7 @@ inar.sim(n, alpha, par, inv = "PO", n.start = NA)
 
 \item{alpha}{A vector of INAR coefficients.}
 
-\item{par}{A vector with the innovation process parameters
-specified in the following order: mean and dispersion (or precision).}
+\item{par}{A vector with the innovation process parameters.}
 
 \item{inv}{Character specification of the innovation process, see
 details.}
@@ -32,12 +31,15 @@ There are some discrete distributions available for the
     innovation process specification. The following table display their
     names and their abbreviations to be passed to \code{\link[tsinteger]{innovation}()}.
 
- \tabular{lll}{
- \bold{Distribution}  \tab \bold{Abbreviation} \tab \bold{Number of parameters}\cr
- BerPoi    \tab \code{"BP"} \tab 2 \cr
- BerG    \tab \code{"BG"} \tab 2 \cr
- Geometric \tab \code{"GE"} \tab 1 \cr
- Poisson  \tab \code{"PO"}      \tab  1  \cr
+  \tabular{llll}{
+ \bold{Distribution}  \tab \bold{Abbreviation} \tab \tab \bold{Parameters}\cr
+ Bernoulli \tab \code{"BE"} \tab \tab \code{0 < theta < 1} \cr
+ BerPoi    \tab \code{"BP"} \tab \tab \code{theta > 0; 0 < phi < 1} \cr
+ BerG    \tab \code{"BG"} \tab \tab \code{theta, phi > 0} \cr
+ Geometric \tab \code{"GE"} \tab \tab \code{theta > 0} \cr
+ Mean-Parameterized COM-Poisson \tab  \code{"CP"} \tab \tab \code{theta, phi > 0} \cr
+ Negative Binomial \tab \code{"NB"} \tab \tab \code{theta, phi > 0} \cr
+ Poisson  \tab \code{"PO"}      \tab \tab  \code{theta > 0}  \cr
  }
 }
 \examples{
