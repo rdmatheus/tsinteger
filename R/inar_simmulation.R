@@ -55,8 +55,8 @@ inar.sim <- function(n, alpha, par,
   p <- length(alpha)
 
   ## Thinning operator
-  tng <- match.arg(thinning, c("binomial", "nbinomial", "poisson"))
-  tng <- get(paste(thinning, "_t", sep = ""))()
+  thinning <- match.arg(thinning, c("binomial", "nbinomial", "poisson"))
+  tng <- tng(thinning)
   thinning <- function(alpha, y){
     sum(tng$r(y, alpha))
   }

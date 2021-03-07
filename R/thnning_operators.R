@@ -1,3 +1,7 @@
+tng <- function(dist){
+  get(paste(dist, "_t", sep = ""))()
+}
+
 ## Distributions: ----
 
 ### Binomial -------------------------------------------------------------------
