@@ -45,9 +45,7 @@
 #'  \describe{
 #'    \item{\code{x}}{ Vector of discrete non-negative quantiles.}
 #'    \item{\code{n}}{ Number of observations to return.}
-#'    \item{\code{mu}}{ Mean parameter of the innovation process.}
-#'    \item{\code{phi}}{ Dispersion parameter of the distribution, if it
-#'     does not exist, it receives \code{NULL}.}
+#'    \item{\code{par}}{ Parameter vector of the innovation process.}
 #'  }
 #'
 #'

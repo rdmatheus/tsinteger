@@ -25,6 +25,7 @@ The function \code{innovation()} returns a list whose components
  \itemize{
    \item{d:}{ Probability mass function \code{function(x, mu, phi)}.}
    \item{r:}{ Random generator function \code{function(n, mu, phi)}.}
+   \item{par:}{ Describes the parametric space of the distribution.}
    \item{npar:}{ Number of parameters of the innovation process specified.}
    \item{constraint:}{ Character; describes the restriction between
        parameters if any.}
@@ -37,9 +38,7 @@ The function \code{innovation()} returns a list whose components
  \describe{
    \item{\code{x}}{ Vector of discrete non-negative quantiles.}
    \item{\code{n}}{ Number of observations to return.}
-   \item{\code{mu}}{ Mean parameter of the innovation process.}
-   \item{\code{phi}}{ Dispersion parameter of the distribution, if it
-    does not exist, it receives \code{NULL}.}
+   \item{\code{par}}{ Parameter vector of the innovation process.}
  }
 }
 \description{
