@@ -82,8 +82,8 @@ innovation <- function(dist){
 #' @export
 print.innovation <- function(x, ...){
 
-  innovations <- c("BP", "BG", "GE", "PO")
-  INNOVATIONS <- c("BerPoi", "BerG", "Geometric", "Poisson")
+  innovations <- c("BE", "BP", "BG", "GE", "PO")
+  INNOVATIONS <- c("Bernoulli", "BerPoi", "BerG", "Geometric", "Poisson")
 
   cat("----------------------------------------",
       "\nInnovation process:", x$name,
