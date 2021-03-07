@@ -7,6 +7,9 @@
 #' @param n A strictly positive integer given the length of the output series.
 #' @param alpha A vector of INAR coefficients.
 #' @param par A vector with the innovation process parameters.
+#' @param thinning Character; specification of the thinning operator.
+#'     Currently, binomial, negative binomial, and poisson thinning operators
+#'     are available.
 #' @param innovation Character specification of the innovation process, see
 #'     details.
 #' @param n.start The length of 'burn-in' period. If \code{NA},
@@ -44,10 +47,19 @@
 #' layout(1)
 #'
 #' @export
-inar.sim <- function(n, alpha, par, innovation = "PO", n.start = NA){
+inar.sim <- function(n, alpha, par,
+                     thinning = c("binomial", "nbinomial", "poisson"),
+                     innovation = "PO", n.start = NA){
 
   ## Autoregressive order
   p <- length(alpha)
+
+  ## Thinning operator
+  tng <- match.arg(thinning, c("binomial", "nbinomial", "poisson"))
+  tng <- get(paste(thinning, "_t", sep = ""))()
+  thinning <- function(alpha, y){
+    sum(tng$r(y, alpha))
+  }
 
   ## Innovation process
   inv <- get(innovation)()
@@ -61,11 +73,6 @@ inar.sim <- function(n, alpha, par, innovation = "PO", n.start = NA){
   e <- inv$r(nn, par)
   y <- vector()
   y[1:p] <- e[1:p]
-
-  ## Thinning binomial operation
-  thinning <- function(alpha, y){
-    stats::rbinom(1, y, alpha)
-  }
 
   # Random generation
   for (t in (p + 1):nn){
