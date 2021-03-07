@@ -23,8 +23,8 @@ The function \code{innovation()} returns a list whose components
     specifically, returns an \code{"innovation"} object with the following
     elements:
  \itemize{
-   \item{d:}{ Probability mass function \code{function(x, mu, phi)}.}
-   \item{r:}{ Random generator function \code{function(n, mu, phi)}.}
+   \item{d:}{ Probability mass function \code{function(x, par)}.}
+   \item{r:}{ Random generator function \code{function(n, par)}.}
    \item{par:}{ Describes the parametric space of the distribution.}
    \item{npar:}{ Number of parameters of the innovation process specified.}
    \item{constraint:}{ Character; describes the restriction between
@@ -50,14 +50,15 @@ There are some discrete distributions available for the
     innovation process specification. The following table display their
     names and their abbreviations to be passed to \code{innovation()}.
 
-  \tabular{lll}{
- \bold{Distribution}  \tab \bold{Abbreviation} \tab \bold{Number of parameters}\cr
- Bernoulli \tab \code{"BE"} \tab 1 \cr
- BerPoi    \tab \code{"BP"} \tab 2 \cr
- BerG    \tab \code{"BG"} \tab 2 \cr
- Mean-Parameterized COM-Poisson \tab \code{"CP"} \tab 2 \cr
- Geometric \tab \code{"GE"} \tab 1 \cr
- Poisson  \tab \code{"PO"}      \tab  1  \cr
+  \tabular{llll}{
+ \bold{Distribution}  \tab \bold{Abbreviation} \tab \tab \bold{Parameters}\cr
+ Bernoulli \tab \code{"BE"} \tab \tab \code{0 < theta < 1} \cr
+ BerPoi    \tab \code{"BP"} \tab \tab \code{theta > 0; 0 < phi < 1} \cr
+ BerG    \tab \code{"BG"} \tab \tab \code{theta, phi > 0} \cr
+ Geometric \tab \code{"GE"} \tab \tab \code{theta > 0} \cr
+ Mean-Parameterized COM-Poisson \tab  \code{"CP"} \tab \tab \code{theta, phi > 0} \cr
+ Negative Binomial \tab \code{"NB"} \tab \tab \code{theta, phi > 0} \cr
+ Poisson  \tab \code{"PO"}      \tab \tab  \code{theta > 0}  \cr
  }
 }
 \examples{
@@ -67,7 +68,6 @@ There are some discrete distributions available for the
 
  ### Methods
  inv
- plot(inv)
 
  ### Generating observations
  x <- inv$r(500, 5)
