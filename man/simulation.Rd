@@ -22,8 +22,9 @@ inar.sim(
 \item{par}{A vector with the innovation process parameters.}
 
 \item{thinning}{Character; specification of the thinning operator.
-Currently, binomial, negative binomial, and poisson thinning operators
-are available.}
+Currently, binomial (\code{"binomial"}),
+negative binomial (\code{"nbinomial"}), and Poisson (\code{"poisson"})
+thinning operators are available.}
 
 \item{innovation}{Character specification of the innovation process, see
 details.}

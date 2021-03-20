@@ -8,8 +8,9 @@
 #' @param alpha A vector of INAR coefficients.
 #' @param par A vector with the innovation process parameters.
 #' @param thinning Character; specification of the thinning operator.
-#'     Currently, binomial, negative binomial, and poisson thinning operators
-#'     are available.
+#'     Currently, binomial (\code{"binomial"}),
+#'     negative binomial (\code{"nbinomial"}), and Poisson (\code{"poisson"})
+#'     thinning operators are available.
 #' @param innovation Character specification of the innovation process, see
 #'     details.
 #' @param n.start The length of 'burn-in' period. If \code{NA},

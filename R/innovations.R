@@ -26,9 +26,9 @@
 #'  }
 #'
 #'
-#' @return The function \code{innovation()} returns a list whose components
-#'     are set of functions referring to the innovation process. More
-#'     specifically, returns an \code{"innovation"} object with the following
+#' @return The function \code{innovation()} returns an \code{"innovation"} object
+#'     that brings a set of information about the innovation process . More
+#'     specifically, returns a list with the following
 #'     elements:
 #'  \itemize{
 #'    \item{d:}{ Probability mass function \code{function(x, par)}.}
